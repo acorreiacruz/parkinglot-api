@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  database:
+    container_name: 'parkinglotdb'
+    image: postgres:15.1-alpine3.17
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=parkinglot
+    ports:
+      - '54320:5432'
+    volumes:
+      - ${POSTGRES_VOLUME}:/var/lib/postgresql/data

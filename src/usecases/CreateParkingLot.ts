@@ -6,10 +6,9 @@ export default class CreateParkingLot {
     async execute(
         code: string,
         capacity: number,
-        occupiedSpaces: number,
         openHour: number,
         closeHour: number
     ): Promise<void> {
-        await this.parkingLotRepository.saveParkingLot(code, capacity, occupiedSpaces, openHour, closeHour);
+        await this.parkingLotRepository.saveParkingLot(code, capacity, openHour, closeHour);
     }
 }

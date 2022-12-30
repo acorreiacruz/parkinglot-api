@@ -41,4 +41,10 @@ describe("Test ParkCar", () => {
             async()=> await parkCar.execute("Burguer King", "ABC1D04", "2022-12-29T16:00:00")
         ).rejects.toThrowError("The parking lot is full");
     });
+    test("Test if ParkCar doesn't park a car twice in a row", async () => {
+        await parkCar.execute("Burguer King", "ABC1D00", "2022-12-29T16:00:00");
+        expect(
+            async()=> await parkCar.execute("Burguer King", "ABC1D00", "2022-12-29T16:30:00")
+        ).rejects.toThrowError("This car already is parked");
+    });
 });

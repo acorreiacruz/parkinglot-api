@@ -36,9 +36,10 @@ export default class ParkedCarMemoryRepository implements ParkedCarRepository {
         })
     }
 
-    async getAllParkedCars(code: string): Promise<ParkedCar[]> {
+    async getAllParkedCars(code: string): Promise<ParkedCar[]|undefined> {
         const parkedCars: ParkedCar[] = [];
         const parkedCarsData = this.parkedCarsData.filter((data) => data.code === code && !data.checkoutDate);
+        if(parkedCarsData.length === 0) return undefined;
         for (const data of parkedCarsData) {
             parkedCars.push(
                 new ParkedCar(data.code, data.plate, new Date(data.enterDate))

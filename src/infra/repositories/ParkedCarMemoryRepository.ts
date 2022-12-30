@@ -15,11 +15,11 @@ export default class ParkedCarMemoryRepository implements ParkedCarRepository {
         this.parkedCarsData = [];
     }
 
-    async getParkedCar(code: string, plate: string): Promise<ParkedCar> {
+    async getParkedCar(code: string, plate: string): Promise<ParkedCar|undefined> {
         const parkedCarData = this.parkedCarsData.find(
             (data) => data.code === code && data.plate === plate && !data.checkoutDate
         );
-        if (!parkedCarData) throw new Error("There is no parked car with this informations");
+        if (!parkedCarData) return undefined;
         return new ParkedCar(
             parkedCarData.code,
             parkedCarData.plate,

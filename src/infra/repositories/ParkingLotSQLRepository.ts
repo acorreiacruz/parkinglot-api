@@ -23,6 +23,7 @@ export default class ParkingLotSQLRepository implements ParkingLotRepository{
             "SELECT pl.code, pl.capacity, pl.open_hour, pl.close_hour,(SELECT COUNT(*) FROM project.parkedcar as pc WHERE pc.code = pl.code AND pc.checkout_date IS NULL)::int AS occupied_spaces FROM project .parkinglot AS pl WHERE pl.code = $1",
             [code]
         );
+        if(!parkingLotData) return undefined;
         return ParkingLotAdapter.create(parkingLotData.code, parkingLotData.capacity, parkingLotData.occupied_spaces, parkingLotData.open_hour, parkingLotData.close_hour);
     }
 

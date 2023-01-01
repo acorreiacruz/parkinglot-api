@@ -6,16 +6,16 @@ export default class ParkedCarSQLRepository implements ParkedCarRepository {
     constructor(private connection: Connection) { }
     
     async getOccupiedSpaces(code: string): Promise<number> {
-        const data = await this.connection.one("SELECT COUNT(*) FROM project.parkedcar WHERE code=$1 AND checkout_date IS NULL", [code]);
+        const data = await this.connection.one("SELECT COUNT(*) FROM parkinglotca.parkedcar WHERE code=$1 AND checkout_date IS NULL", [code]);
         return parseInt(data);
     }
 
     async saveParkedCar(code: string, plate: string, enterDate: string): Promise<void> {
-        await this.connection.query("INSERT INTO project.parkedcar(code, plate, enter_date) VALUES($1, $2, $3)", [code, plate, enterDate]);
+        await this.connection.query("INSERT INTO parkinglotca.parkedcar(code, plate, enter_date) VALUES($1, $2, $3)", [code, plate, enterDate]);
     }
 
     async getAllParkedCars(code: string): Promise<ParkedCar[] | undefined> {
-        const parkedCarsData = await this.connection.query("SELECT * FROM project.parkedcar WHERE code=$1 AND checkout_date IS NULL", [code]);
+        const parkedCarsData = await this.connection.query("SELECT * FROM parkinglotca.parkedcar WHERE code=$1 AND checkout_date IS NULL", [code]);
         if (parkedCarsData.length === 0) return undefined;
         const parkedCars: ParkedCar[] = [];
         for (const data of parkedCarsData) {
@@ -27,11 +27,11 @@ export default class ParkedCarSQLRepository implements ParkedCarRepository {
     }
 
     async checkoutParkedCar(code: string, plate: string): Promise<void> {
-        await this.connection.query("UPDATE project.parkedcar SET checkout_date=NOW() WHERE code=$1 AND plate=$2 AND checkout_date IS NULL", [code, plate]);
+        await this.connection.query("UPDATE parkinglotca.parkedcar SET checkout_date=NOW() WHERE code=$1 AND plate=$2 AND checkout_date IS NULL", [code, plate]);
     }
 
     async getParkedCar(code: string, plate: string): Promise<ParkedCar | undefined> {
-        const parkedCarData = await this.connection.one("SELECT * FROM project.parkedcar WHERE code=$1 AND plate=$2 AND checkout_date IS NULL", [code, plate]);
+        const parkedCarData = await this.connection.one("SELECT * FROM parkinglotca.parkedcar WHERE code=$1 AND plate=$2 AND checkout_date IS NULL", [code, plate]);
         if (!parkedCarData) return undefined;
         return new ParkedCar(parkedCarData.code, parkedCarData.plate, new Date(parkedCarData.enter_date));
     }

@@ -24,6 +24,6 @@ describe("Test GetParkingLot", () => {
     test("Test if GetParkingLot throws a error when there isn't the parking lot", async () =>{
         expect(
             async () => await getParkingLot.execute("Super Market")
-        ).rejects.toThrowError("There is no ParkingLot with this code");
+        ).rejects.toThrowError("There is no parking lot with this code");
     });
 });

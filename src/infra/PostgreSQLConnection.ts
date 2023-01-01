@@ -5,7 +5,7 @@ export default class PostgeSQLConnection implements Connection {
     private connection: any;
     
     constructor(){
-        this.connection = pgp()("postgres://super:super12345@localhost:54320/cleanarch");
+        this.connection = pgp()("postgres://super:super12345@localhost:54320/projects");
     }
 
     query(statement: string, paramas: any[]): Promise<any> {

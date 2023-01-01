@@ -32,6 +32,6 @@ describe("Test GetParkingLotParkedCars", () => {
 });
 
 afterEach(async () => {
-    await postgreSQLConnection.query("DELETE FROM project.parkinglot WHERE code=$1",["Orlando Outlet"]);
+    await postgreSQLConnection.query("DELETE FROM parkinglotca.parkinglot WHERE code=$1",["Orlando Outlet"]);
     await postgreSQLConnection.close();
 });

@@ -1,4 +1,5 @@
 import ParkingLotAdapter from "../../adapters/ParkingLotAdapter";
+import ParkkingLotAlreadyExists from "../../entities/errors/ParkingLotAlreadyExists";
 import ParkingLot from "../../entities/ParkingLot";
 import Connection from "../Connection";
 import ParkingLotRepository from "./ParkingLotRepository";
@@ -14,7 +15,7 @@ export default class ParkingLotSQLRepository implements ParkingLotRepository {
             );
         }
         catch (error) {
-            throw new Error("A parking lot with this code already exists");
+            throw new ParkkingLotAlreadyExists();
         }
 
     }

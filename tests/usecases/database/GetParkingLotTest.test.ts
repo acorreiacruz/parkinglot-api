@@ -23,8 +23,10 @@ describe("Test GetParkingLot", () => {
         expect(parkingLot.closeHour).toBe(24);
     });
 
+    test("Test if GetParkingLot throws a error when there isn't the parking lot", () => {
         expect(
             async () => await getParkingLot.execute("Jhon Hopkins Hospital")
+        ).rejects.toThrowError("There is no parking lot with this code");
     });
 });
 

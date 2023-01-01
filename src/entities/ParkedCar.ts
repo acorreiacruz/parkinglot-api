@@ -1,6 +1,8 @@
+import InvalidCarPlate from "./errors/InvalidCarPlate";
+
 export default class ParkedCar {
     constructor(public code: string, public plate: string, public enterDate: Date) {
-        if(!ParkedCar.isValid(plate)) throw new Error("The ParkedCar plate should be in the format XXX0000 or XXX0X00");
+        if(!ParkedCar.isValid(plate)) throw new InvalidCarPlate();
     }
     static isValid(value: string): boolean{
         const plateType1 = /^[A-Z]{3}[0-9]{4}$/;

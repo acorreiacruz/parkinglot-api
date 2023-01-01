@@ -2,6 +2,7 @@ import CarAlreadyParked from "../entities/errors/CarAlreadyParked";
 import InvalidCarPlate from "../entities/errors/InvalidCarPlate";
 import ParkingLotDoesNotExists from "../entities/errors/ParkingLotDoesNotExists";
 import ParkingLotIsClosed from "../entities/errors/ParkingLotIsClosed";
+import ParkingLotIsFull from "../entities/errors/ParkingLotIsFull";
 import ParkedCar from "../entities/ParkedCar";
 import ParkedCarRepository from "../infra/repositories/ParkedCarRepository";
 import ParkingLotRepository from "../infra/repositories/ParkingLotRepository";
@@ -18,7 +19,7 @@ export default class ParkCar {
         const parkedCar = await this.parkedCarRepository.getParkedCar(code, plate);
         if(parkedCar) throw new CarAlreadyParked();
         if(!parkingLot.isOpen(new Date(enterDate))) throw new ParkingLotIsClosed();
-        if(parkingLot.isFull()) throw new Error("The parking lot is full");
+        if(parkingLot.isFull()) throw new ParkingLotIsFull();
         await this.parkedCarRepository.saveParkedCar(code, plate, enterDate);
     }
 }

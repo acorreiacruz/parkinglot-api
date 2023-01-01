@@ -1,8 +1,8 @@
--- Active: 1672411513112@@127.0.0.1@54320@cleanarch
+-- Active: 1672594723589@@127.0.0.1@54320@projects
 
-CREATE SCHEMA project;
+CREATE SCHEMA parkinglotca;
 
-create table if not exists project.parkinglot(
+create table if not exists parkinglotca.parkinglot(
     code VARCHAR(150),
     capacity INTEGER NOT NULL,
     open_hour INTEGER NOT NULL,
@@ -10,10 +10,10 @@ create table if not exists project.parkinglot(
     PRIMARY KEY (code)
 );
 
-CREATE TABLE IF NOT EXISTS project.parkedcar(
+CREATE TABLE IF NOT EXISTS parkinglotca.parkedcar(
     code VARCHAR(150),
     plate VARCHAR(7) NOT NULL,
     enter_date TIMESTAMP NOT NULL,
     checkout_date TIMESTAMP DEFAULT NULL,
-    FOREIGN KEY (code) REFERENCES project.parkinglot(code) ON DELETE CASCADE
+    FOREIGN KEY (code) REFERENCES parkinglotca.parkinglot(code) ON DELETE CASCADE
 );

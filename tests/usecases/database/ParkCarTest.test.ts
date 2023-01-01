@@ -53,6 +53,6 @@ describe("Test ParkCar", () => {
 });
 
 afterEach(async () => {
-    await postgreSQLConnection.query("DELETE FROM project.parkinglot WHERE code=$1", ["Moes's Bar"]);
+    await postgreSQLConnection.query("DELETE FROM parkinglotca.parkinglot WHERE code=$1", ["Moes's Bar"]);
     await postgreSQLConnection.close();
 });

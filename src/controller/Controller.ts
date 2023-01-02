@@ -17,6 +17,7 @@ export type ControllerOutput = {
     body: any;
 };
 
+export class Controller {
         const getParkingLot = new GetParkingLot(parkingLotRepository);
         let parkingLot: ParkingLot;
         }

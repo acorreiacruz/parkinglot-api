@@ -15,7 +15,12 @@ const parkedCarRepository = new ParkedCarSQLRepository(postgreSQLConnection);
 
 export type ControllerOutput = {
     body: any;
+    statusCode: number
 };
+
+const createControllerOutput = (code: number, body: any): ControllerOutput => {
+    return { body: {error:body.message} || {detail:body}, statusCode: code };
+}
 
 export class Controller {
         const getParkingLot = new GetParkingLot(parkingLotRepository);

@@ -13,6 +13,11 @@ const postgreSQLConnection = new PostgeSQLConnection();
 const parkingLotRepository = new ParkingLotSQLRepository(postgreSQLConnection);
 const parkedCarRepository = new ParkedCarSQLRepository(postgreSQLConnection);
 
+type ControllerOutput = {
+    body: any;
+    statusCode:number
+};
+
 export default class Controller {
     static async getParkingLot(params: any, body: any) {
         const getParkingLot = new GetParkingLot(parkingLotRepository);

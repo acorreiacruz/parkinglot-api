@@ -18,8 +18,8 @@ export type ControllerOutput = {
     statusCode: number
 };
 
-const createControllerOutput = (code: number, body: any): ControllerOutput => {
-    return { body: {error:body.message} || {detail:body}, statusCode: code };
+const createControllerOutput = (code: number, body: any, error: boolean = false): ControllerOutput => {
+    return { body: error ? { error: body.message } : body, statusCode: code };
 }
 
 export class Controller {
@@ -36,14 +36,10 @@ export class Controller {
         const checkoutParkedCar = new CheckoutParkedCar(parkedCarRepository);
             await checkoutParkedCar.execute(params.code, params.plate.toUpperCase());
         }
-        return {
-        }
     }
 
         const parkCark = new ParkCar(parkedCarRepository, parkingLotRepository);
             await parkCark.execute(params.code, body.plate, body.enter_date);
-        }
-        return {
         }
     }
 
@@ -51,6 +47,5 @@ export class Controller {
         let parkedCars: ParkedCar[];
             parkedCars = await getParkingLotParkedCars.execute(params.code);
         }
-        return parkedCars;
     }
 }

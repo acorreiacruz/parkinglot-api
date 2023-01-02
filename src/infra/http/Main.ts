@@ -1,6 +1,6 @@
 import Express from "express";
 import ExpressAdapter from "../../adapters/ExpressAdapter";
-import Controller from "../../controller/Controller";
+import {Controller} from "../../controller/Controller";
 
 const app = Express();
 app.use(Express.json());

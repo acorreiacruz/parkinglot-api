@@ -27,7 +27,7 @@ export default class ParkedCarSQLRepository implements ParkedCarRepository {
     }
 
     async checkoutParkedCar(code: string, plate: string): Promise<void> {
-        await this.connection.query("UPDATE parkinglotca.parkedcar SET checkout_date=NOW() WHERE code=$1 AND plate=$2 AND checkout_date IS NULL", [code, plate]);
+        await this.connection.query("UPDATE parkinglotca.parkedcar SET checkout_date=NOW() WHERE EXISTS (SELECT * FROM project.parkinglot WHERE code = $1) AND plate=$2 AND checkout_date IS NULL", [code, plate]);
     }
 
     async getParkedCar(code: string, plate: string): Promise<ParkedCar | undefined> {

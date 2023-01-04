@@ -4,7 +4,7 @@
   "description": "Modelling a ParkingLot API with Clean Architecture",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --no-cache",
     "server": "npx nodemon ./src/infra/http/Main.ts"
   },
   "keywords": [],
@@ -15,6 +15,7 @@
     "@swc/jest": "^0.2.24",
     "@types/jest": "^29.2.4",
     "@types/pg-promise": "^5.4.3",
+    "axios": "^1.2.2",
     "express": "^4.18.2",
     "jest": "^29.3.1",
     "pg-promise": "^10.15.4",

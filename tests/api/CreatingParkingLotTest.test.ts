@@ -7,14 +7,36 @@ describe('Test API CreatingParkingLot', () => {
         const response = await axios.post(
             baseUrl,
             {
-                code:"parkinglot01",
+                code: "parkinglot01",
                 capacity: 30,
                 open_hour: 7,
-                close_hour:22
+                close_hour: 22
             }
         );
         expect(response.data).toBe("Parking lot created with successfully");
         expect(response.status).toBe(201);
+    });
+
+    test('Should not create a parking lot with same code', async () => {
+        const response1 = await axios.post(
+            baseUrl,
+            {
+                code: "parkinglot01",
+                capacity: 30,
+                open_hour: 7,
+                close_hour: 22
+            }
+        );
+        const response2 = await axios.post(
+            baseUrl,
+            {
+                code: "parkinglot01",
+                capacity: 30,
+                open_hour: 7,
+                close_hour: 22
+            }
+        );
+        expect(response2.status).toBe(406);
     });
 });
 
